@@ -7,6 +7,7 @@
  * Released under the BSD-2-Clause license
  * https://github.com/jtblin/angular-chart.js/blob/master/LICENSE
  */
+let alphaValue = 0.4;
 (function (factory) {
   'use strict';
   if (typeof exports === 'object') {
@@ -104,6 +105,8 @@
     };
   }
 
+
+
   function ChartJsFactory (ChartJs, $timeout) {
     return function chart (type) {
       return {
@@ -122,6 +125,9 @@
           chartBackgroundAlpha:'=?'
         },
         link: function (scope, elem/*, attrs */) {
+
+          alphaValue = scope.chartBackgroundAlpha || alphaValue;
+
           if (useExcanvas) window.G_vmlCanvasManager.initElement(elem[0]);
 
           // Order of setting "watch" matter
@@ -268,7 +274,7 @@
       var alpha = color[3] || 1;
       color = color.slice(0, 3);
       return {
-        backgroundColor: rgba(color, scope.chartBackgroundAlpha || 0.4),
+        backgroundColor: rgba(color, alphaValue || 0.4),
         pointBackgroundColor: rgba(color, alpha),
         pointHoverBackgroundColor: rgba(color, 0.9),
         borderColor: rgba(color, alpha),

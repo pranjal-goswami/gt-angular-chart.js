@@ -197,7 +197,8 @@ let alphaValue = 0.4;
       scope.chart = new ChartJs.Chart(ctx, {
         type: type,
         data: data,
-        options: options
+        options: options,
+        plugins: options.plugins || []
       });
       scope.$emit('chart-create', scope.chart);
       bindEvents(cvs, scope);
